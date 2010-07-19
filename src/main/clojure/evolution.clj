@@ -1,4 +1,5 @@
 (ns evolution)
+(use 'clojure.contrib.seq-utils)
 
 (defn div [x y]
 	(if (zero? y) x (/ x y)))
@@ -22,7 +23,10 @@
 (defn create-rand-operators [size]
         (take size (repeatedly random-operator)))
 
-(defn mutate [numbers operators]
+(defn create-rand-equation [numbers]
+	[(vec (shuffle numbers)) (vec (create-rand-operators (dec (count numbers))))])
+
+(defn mutate [[numbers operators]]
         (let [toss-coin (rand-int 2)]
                 (if (= toss-coin 0) 
                         [numbers (change-operator operators (rand-int 5))]
@@ -33,3 +37,5 @@
         (o (p (q e d) a) (r b (s c f))) ))
 
 
+(defn create-initial-population [population-size numbers]
+	(take population-size (repeatedly (partial create-rand-equation numbers))))

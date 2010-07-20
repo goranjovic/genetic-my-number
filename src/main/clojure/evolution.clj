@@ -1,5 +1,6 @@
 (ns evolution)
 (use 'clojure.contrib.seq-utils)
+(use 'clojure.contrib.math)
 
 (defn div [x y]
 	(if (zero? y) x (/ x y)))
@@ -39,3 +40,6 @@
 
 (defn create-initial-population [population-size numbers]
 	(take population-size (repeatedly (partial create-rand-equation numbers))))
+
+(defn calculate-fitness [goal-value [numbers operators] ]
+	(with-meta [numbers operators] {:fitness (abs (- goal-value (evaluate [numbers operators])))}))

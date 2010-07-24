@@ -41,5 +41,9 @@
 (defn create-initial-population [population-size numbers]
 	(take population-size (repeatedly (partial create-rand-equation numbers))))
 
-(defn calculate-fitness [goal-value [numbers operators] ]
-	(with-meta [numbers operators] {:fitness (abs (- goal-value (evaluate [numbers operators])))}))
+(defn calculate-fitness [goal-value sign [numbers operators]]
+	(sign (abs (- goal-value (evaluate [numbers operators])))))
+
+(defn sort-by-fitness [goal-value population]
+	(sort-by (partial calculate-fitness goal-value -) population))
+

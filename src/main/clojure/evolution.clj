@@ -59,20 +59,18 @@
 (defn operators-to-string [operators]
 		(replace {+ "+", - "-", * "*", div "/", r "r", l "l"} operators)) 
 
-(defn show-winner [[[numbers operators]]]
-		(println "Numbers:" numbers)
-		(println "Operators:" (operators-to-string operators))
-		(println "Value:" (evaluate [numbers operators]))
-		)
+
+(defn equation-pretty-print [[[numbers operators]]]
+		(let [[a b c d e f] numbers [o p q r s] (operators-to-string operators)]
+		(println (evaluate [numbers operators]) "= ((" e q d ")" p a ")" o "(" b r "(" c s f "))"  )))
 
 (defn get-best [goal-value old-population]
 	(take 1 (sort-by-fitness goal-value  old-population )))
 
 (defn evolution [goal-value generation  old-population]
 		(if (termination? generation)
-			(show-winner (get-best  goal-value  old-population ))
+			(equation-pretty-print (get-best  goal-value  old-population ))
 			(evolution goal-value (inc generation)
-			;	(println "Gen" generation " " (evaluate (get-best  goal-value  old-population )))
 				(next-generation (select-survivors
 					(sort-by-fitness goal-value old-population))))))
 

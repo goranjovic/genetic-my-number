@@ -53,3 +53,23 @@
 (defn next-generation [survivors]
 		(map conj (map mutate survivors) survivors))
 
+(defn termination? [generation]
+		(= generation 1000))
+
+(defn operators-to-string [operators]
+		(replace {+ "+", - "-", * "*", div "/", r "r", l "l"} operators)) 
+
+(defn show-winner [[[numbers operators]]]
+		(println "Numbers:" numbers)
+		(println "Operators:" (operators-to-string operators))
+		(println "Value:" (evaluate [numbers operators]))
+		)		
+
+(defn evolution [goal-value generation  old-population]
+		(if (termination? generation)
+			(show-winner (take 1 (sort-by-fitness goal-value  old-population )))
+			(evolution goal-value (inc generation)
+				(next-generation (select-survivors
+					(sort-by-fitness goal-value old-population))))))
+
+

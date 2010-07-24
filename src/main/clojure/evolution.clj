@@ -47,3 +47,9 @@
 (defn sort-by-fitness [goal-value population]
 	(sort-by (partial calculate-fitness goal-value -) population))
 
+(defn select-survivors [population]
+		(take (/ (count population) 2) population))
+
+(defn next-generation [survivors]
+		(map conj (map mutate survivors) survivors))
+

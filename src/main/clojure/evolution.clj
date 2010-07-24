@@ -42,7 +42,8 @@
 	(take population-size (repeatedly (partial create-rand-equation numbers))))
 
 (defn calculate-fitness [goal-value sign [numbers operators]]
-	(sign (abs (- goal-value (evaluate [numbers operators])))))
+	(let [difference (sign (abs (- goal-value (evaluate [numbers operators]))))]
+		(if (or (ratio? difference) (neg? difference)) 100000 difference)))
 
 (defn sort-by-fitness [goal-value population]
 	(sort-by (partial calculate-fitness goal-value +) population))

@@ -45,13 +45,13 @@
 	(sign (abs (- goal-value (evaluate [numbers operators])))))
 
 (defn sort-by-fitness [goal-value population]
-	(sort-by (partial calculate-fitness goal-value -) population))
+	(sort-by (partial calculate-fitness goal-value +) population))
 
 (defn select-survivors [population]
 		(take (/ (count population) 2) population))
 
 (defn next-generation [survivors]
-		(map conj (map mutate survivors) survivors))
+		(interleave (map mutate survivors) survivors))
 
 (defn termination? [generation]
 		(= generation 1000))
@@ -63,12 +63,16 @@
 		(println "Numbers:" numbers)
 		(println "Operators:" (operators-to-string operators))
 		(println "Value:" (evaluate [numbers operators]))
-		)		
+		)
+
+(defn get-best [goal-value old-population]
+	(take 1 (sort-by-fitness goal-value  old-population )))
 
 (defn evolution [goal-value generation  old-population]
 		(if (termination? generation)
-			(show-winner (take 1 (sort-by-fitness goal-value  old-population )))
+			(show-winner (get-best  goal-value  old-population ))
 			(evolution goal-value (inc generation)
+			;	(println "Gen" generation " " (evaluate (get-best  goal-value  old-population )))
 				(next-generation (select-survivors
 					(sort-by-fitness goal-value old-population))))))
 

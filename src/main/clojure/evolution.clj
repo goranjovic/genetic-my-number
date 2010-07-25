@@ -17,9 +17,11 @@
 	(let [operator (operators index)]
 		(replace {operator (random-operator)} operators)))
 
+(defn insert [vect position element]
+	(into [] (concat (subvec vect 0 position) [element] (subvec vect (inc position)))))
+
 (defn swap-elements [elements index1 index2]
-	(let [element1 (elements index1) element2 (elements index2)]
-		(replace {element1 element2 element2 element1} elements)))
+		(insert (insert elements index1 (elements index2)) index2 (elements index1)))
 
 (defn create-rand-operators [size]
         (take size (repeatedly random-operator)))

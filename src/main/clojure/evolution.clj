@@ -77,4 +77,5 @@
 				(next-generation (select-survivors
 					(sort-by-fitness goal-value old-population))))))
 
-
+(defn solve [goal-value numbers]
+		(evolution goal-value 0 (create-initial-population 300 numbers)))

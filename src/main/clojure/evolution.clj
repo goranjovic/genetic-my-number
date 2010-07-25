@@ -56,26 +56,23 @@
 (defn next-generation [survivors]
 		(interleave (map mutate survivors) survivors))
 
-(defn termination? [generation]
-		(= generation 1000))
-
 (defn operators-to-string [operators]
 		(replace {+ "+", - "-", * "*", div "/", r "r", l "l"} operators)) 
 
 
-(defn equation-pretty-print [[[numbers operators]]]
+(defn equation-pretty-print [[numbers operators] generation]
 		(let [[a b c d e f] numbers [o p q r s] (operators-to-string operators)]
-		(println (evaluate [numbers operators]) "= ((" e q d ")" p a ")" o "(" b r "(" c s f "))"  )))
+		(println (evaluate [numbers operators]) "= ((" e q d ")" p a ")" o "(" b r "(" c s f "))"  )
+		(println "generation:" generation)))
 
-(defn get-best [goal-value old-population]
-	(take 1 (sort-by-fitness goal-value  old-population )))
 
 (defn evolution [goal-value generation  old-population]
-		(if (termination? generation)
-			(equation-pretty-print (get-best  goal-value  old-population ))
+	(let [sorted-population (sort-by-fitness goal-value  old-population )
+	      champion (first (take 1 sorted-population))]
+		(if (or (= generation 1000) (= (evaluate champion) goal-value))
+			(equation-pretty-print champion generation)
 			(evolution goal-value (inc generation)
-				(next-generation (select-survivors
-					(sort-by-fitness goal-value old-population))))))
+				(next-generation (select-survivors sorted-population))))))
 
 (defn solve [goal-value numbers]
 		(evolution goal-value 0 (create-initial-population 300 numbers)))

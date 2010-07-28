@@ -62,8 +62,9 @@
 
 (defn equation-pretty-print [[numbers operators] generation]
 		(let [[a b c d e f] numbers [o p q r s] (operators-to-string operators)]
-		(println (evaluate [numbers operators]) "= ((" e q d ")" p a ")" o "(" b r "(" c s f "))"  )
-		(println "generation:" generation)))
+		(str "[gen:" generation "]" 
+				(evaluate [numbers operators]) 
+			  "= ((" e q d ")" p a ")" o "(" b r "(" c s f "))"  )))
 
 
 (defn evolution [goal-value generation  old-population]

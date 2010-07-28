@@ -21,23 +21,32 @@
 (def sum-form 
   (html-doc "Sum" 
     (form-to [:post "/"] 
-      (text-field {:size 3} :x) 
-      "+" 
-      (text-field {:size 3} :y) 
-      (submit-button "=")))) 
+      (text-field {:size 3} :x)
+      (text-field {:size 3} :a) 
+      (text-field {:size 3} :b)
+      (text-field {:size 3} :c)
+      (text-field {:size 3} :d)
+      (text-field {:size 3} :e)
+      (text-field {:size 3} :f) 
+      (submit-button "Solve")))) 
 
 (defn result 
-  [x y] 
-  (let [x (Integer/parseInt x) 
-        y (Integer/parseInt y)] 
+  [x a b c d e f] 
+  (let [x (Integer/parseInt x)
+	a (Integer/parseInt a)
+        b (Integer/parseInt b)
+        c (Integer/parseInt c)
+        d (Integer/parseInt d)
+        e (Integer/parseInt e) 
+        f (Integer/parseInt f)] 
     (html-doc "Result" 
-      x " + " y " = " (+ x y)))) 
+      (solve x [a b c d e f])))) 
 
 (defroutes webservice
   (GET "/" 
     sum-form) 
   (POST "/" 
-    (result (params :x) (params :y)))) 
+    (result (params :x) (params :a) (params :b) (params :c) (params :d) (params :e) (params :f)))) 
 
 (defn serve-app []
 	(run-server {:port 8080 :join? false} 

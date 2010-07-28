@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.goranjovic</groupId>
 	<artifactId>genetic-my-number</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Proba2</name>
+	<name>Genetic My Number</name>
 	<url>http://code.google.com/p/genetic-my-number</url>
 	<scm>
 	  <connection>
@@ -64,6 +64,22 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.9</version>
+				<configuration>
+					<requestLog implementation="org.mortbay.jetty.NCSARequestLog">
+						<append>true</append>
+					</requestLog>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<archiveClasses>true</archiveClasses>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

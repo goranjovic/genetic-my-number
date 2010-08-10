@@ -43,8 +43,8 @@
       (solve x [a b c d e f])))) 
 
 (defroutes webservice
-  (GET "/" 
-    sum-form) 
+  (GET "/favicon.ico" nil)
+  (GET "/" sum-form) 
   (POST "/" 
     (result (params :x) (params :a) (params :b) (params :c) (params :d) (params :e) (params :f)))) 
 

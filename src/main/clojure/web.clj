@@ -9,7 +9,8 @@
     (doctype :html4) 
     [:html 
       [:head 
-        [:title title]] 
+        [:title title]
+	[:link {:rel "stylesheet" :href "style.css" :type "text/css" }]] 
       [:body 
        [:div 
 	[:h2 
@@ -21,14 +22,14 @@
 (def sum-form 
   (html-doc "Sum" 
     (form-to [:post "/"] 
-      (text-field {:size 3} :x)
-      (text-field {:size 3} :a) 
-      (text-field {:size 3} :b)
-      (text-field {:size 3} :c)
-      (text-field {:size 3} :d)
-      (text-field {:size 3} :e)
-      (text-field {:size 3} :f) 
-      (submit-button "Solve")))) 
+      (text-field {:size 3 :class "x"} :x)
+      (text-field {:size 3 :class "a"} :a) 
+      (text-field {:size 3 :class "b"} :b)
+      (text-field {:size 3 :class "c"} :c)
+      (text-field {:size 3 :class "d"} :d)
+      (text-field {:size 3 :class "e"} :e)
+      (text-field {:size 3 :class "f"} :f) 
+      (submit-button { :class "solve"} "Solve")))) 
 
 (defn result 
   [x a b c d e f] 
@@ -44,7 +45,11 @@
 
 (defroutes webservice
   (GET "/favicon.ico" nil)
-  (GET "/" sum-form) 
+  (GET "/" sum-form)
+  (GET "/*"
+       (or (serve-file "./src/main/webapp" (params :*)) ;; This is needed to find CSS and js files
+       :next))
+  (GET "*"  "page not found")
   (POST "/" 
     (result (params :x) (params :a) (params :b) (params :c) (params :d) (params :e) (params :f)))) 
 

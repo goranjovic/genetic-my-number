@@ -52,5 +52,6 @@
     (sum-form params (result (params :x) (params :a) (params :b) (params :c) (params :d) (params :e) (params :f)))))
 
 (defn serve-app []
-	(run-server {:port 8080 :join? false} 
-  	"/*" (servlet webservice)))
+	(defonce server
+	     (run-server {:port 8080 :join? false} 
+  	        "/*" (servlet webservice))))

@@ -44,7 +44,6 @@
       (solve x [a b c d e f])))) 
 
 (defroutes webservice
-  (GET "/favicon.ico" nil)
   (GET "/" sum-form)
   (GET "/*"
        (or (serve-file "./src/main/webapp" (params :*)) ;; This is needed to find CSS and js files

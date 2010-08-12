@@ -10,17 +10,16 @@
     [:html 
       [:head 
         [:title title]
-	[:link {:rel "stylesheet" :href "style.css" :type "text/css" }]] 
+	(include-css "style.css")]
       [:body 
        [:div 
 	[:h2 
-	 ;; Pass a map as the first argument to be set as attributes of the element
-	 [:a {:href "/"} "Genetic My Number"]]]
+	 [:a {:href "/"} title]]]
         body]])) 
 
 
 (def sum-form 
-  (html-doc "Sum" 
+  (html-doc "Genetic My Number" 
     (form-to [:post "/"] 
       (text-field {:size 3 :class "x"} :x)
       (text-field {:size 3 :class "a"} :a) 
@@ -46,9 +45,9 @@
 (defroutes webservice
   (GET "/" sum-form)
   (GET "/*"
-       (or (serve-file "./src/main/webapp" (params :*)) ;; This is needed to find CSS and js files
+       (or (serve-file "./src/main/webapp" (params :*)) 
        :next))
-  (GET "*"  "page not found")
+  (GET "*"  404)
   (POST "/" 
     (result (params :x) (params :a) (params :b) (params :c) (params :d) (params :e) (params :f)))) 
 

@@ -12,9 +12,9 @@
         [:title title]
 	(include-css "style.css")]
       [:body  
-       [:div 
+       [:div {:class "title"}
 	[:h2 
-	 [:a {:href "/"} title]]]
+	 [:a {:href "/" } title]]]
         body]])) 
 
 
@@ -32,14 +32,14 @@
       (submit-button { :class "solve"} "Solve"))))
 
 (defn result 
-  [x a b c d e f] 
-  (let [x (Integer/parseInt x)
-	a (Integer/parseInt a)
-        b (Integer/parseInt b)
-        c (Integer/parseInt c)
-        d (Integer/parseInt d)
-        e (Integer/parseInt e) 
-        f (Integer/parseInt f)] 
+  [params] 
+  (let [x (Integer/parseInt (params :x))
+	a (Integer/parseInt (params :a))
+        b (Integer/parseInt (params :b))
+        c (Integer/parseInt (params :c))
+        d (Integer/parseInt (params :d))
+        e (Integer/parseInt (params :e)) 
+        f (Integer/parseInt (params :f))] 
       (solve x [a b c d e f]))) 
 
 (defroutes webservice
@@ -49,7 +49,7 @@
        :next))
   (GET "*"  404)
   (POST "/" 
-    (sum-form params (result (params :x) (params :a) (params :b) (params :c) (params :d) (params :e) (params :f)))))
+    (sum-form params (result params))))
 
 (defn serve-app []
 	(defonce server

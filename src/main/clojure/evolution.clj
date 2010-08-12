@@ -56,15 +56,19 @@
 (defn next-generation [survivors]
 		(interleave (map mutate survivors) survivors))
 
-(defn operators-to-string [operators]
-		(replace {+ "+", - "-", * "*", div "/", r "r", l "l"} operators)) 
+(def operators-visible {+ "+", - "-", * "*", div "/", r "r", l "l"})
+
+(defn print-rel [e1 rel e2]
+	(if (= rel l) e1 
+		(if (= rel r) e2
+			(str "(" e1 " " (operators-visible rel) " " e2 ")" ))))
 
 
 (defn equation-pretty-print [[numbers operators] generation]
-		(let [[a b c d e f] numbers [o p q r s] (operators-to-string operators)]
-		(str "[gen:" generation "]" 
-				(evaluate [numbers operators]) 
-			  "= ((" e q d ")" p a ")" o "(" b r "(" c s f "))"  )))
+		(let [[a b c d e f] numbers [o p q r s] operators]
+		(str "[gen: " generation "] " 
+				(evaluate [numbers operators]) " = " 
+		(print-rel (print-rel (print-rel e q d) p a) o (print-rel b r (print-rel c s f))) )))
 
 
 (defn evolution [goal-value generation  old-population]

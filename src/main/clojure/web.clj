@@ -36,8 +36,7 @@
         d (Integer/parseInt (params :d))
         e (Integer/parseInt (params :e)) 
         f (Integer/parseInt (params :f))] 
-(class (var b))))
- ;     (solve x [a b c d e f]))) 
+      (solve x [a b c d e f]))) 
 
 (defroutes webservice
   (GET "/" (sum-form params nil))

@@ -3,7 +3,7 @@
 (use 'clojure.contrib.math)
 
 (defn div [x y]
-	(if (zero? y) x (/ x y)))
+	(if (zero? y) (Double/NaN) (/ x y)))
 
 (defn l [x y] x)
 
@@ -43,12 +43,13 @@
 (defn create-initial-population [population-size numbers]
 	(take population-size (repeatedly (partial create-rand-equation numbers))))
 
-(defn calculate-fitness [goal-value sign [numbers operators]]
-	(let [difference (sign (abs (- goal-value (evaluate [numbers operators]))))]
-		(if (or (ratio? difference) (neg? difference)) 100000 difference)))
+(defn calculate-fitness [goal-value [numbers operators]]
+	(let [difference (abs (- goal-value (evaluate [numbers operators])))]
+		(if (or (ratio? difference)(Double/isNaN difference))
+				 (Double/POSITIVE_INFINITY) difference)))
 
 (defn sort-by-fitness [goal-value population]
-	(sort-by (partial calculate-fitness goal-value +) population))
+	(sort-by (partial calculate-fitness goal-value) population))
 
 (defn select-survivors [population]
 		(take (/ (count population) 2) population))

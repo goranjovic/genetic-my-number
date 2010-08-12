@@ -20,19 +20,15 @@
 
 (defn sum-form [oldvalues result]
   (html-doc "Genetic My Number"
-    (form-to [:post "/"] 
-      (text-field {:size 3 :class "x"} :x (oldvalues :x))
-      (text-field {:size 3 :class "a"} :a (oldvalues :a)) 
-      (text-field {:size 3 :class "b"} :b (oldvalues :b))
-      (text-field {:size 3 :class "c"} :c (oldvalues :c))
-      (text-field {:size 3 :class "d"} :d (oldvalues :d))
-      (text-field {:size 3 :class "e"} :e (oldvalues :e))
-      (text-field {:size 3 :class "f"} :f (oldvalues :f))
+    (form-to [:post "/"]
+      (map (fn [kwd] 
+		(text-field {:size 3 :class (name kwd)} kwd (oldvalues kwd))) 
+		[:x :a :b :c :d :e :f]) 
       (text-area  {:class "result"} :result result) 
       (submit-button { :class "solve"} "Solve"))))
 
 (defn result 
-  [params] 
+  [params]
   (let [x (Integer/parseInt (params :x))
 	a (Integer/parseInt (params :a))
         b (Integer/parseInt (params :b))
@@ -40,7 +36,8 @@
         d (Integer/parseInt (params :d))
         e (Integer/parseInt (params :e)) 
         f (Integer/parseInt (params :f))] 
-      (solve x [a b c d e f]))) 
+(class (var b))))
+ ;     (solve x [a b c d e f]))) 
 
 (defroutes webservice
   (GET "/" (sum-form params nil))

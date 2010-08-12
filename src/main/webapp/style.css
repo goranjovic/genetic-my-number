@@ -11,36 +11,36 @@
 
 .a{
    position:absolute;
-   top:15%;
+   top:20%;
 }
 
 .b {
    position:absolute;
-   top:15%;
+   top:20%;
    left:10%;
 }
 
 .c {
    position:absolute;
-   top:15%;
+   top:20%;
    left:20%;
 }
 
 .d {
    position:absolute;
-   top:15%;
+   top:20%;
    left:30%
 }
 
 .e {
    position:absolute;
-   top:15%;
+   top:20%;
    left:40%
 }
 
 .f {
    position:absolute;
-   top:15%;
+   top:20%;
    left:50%
 }
 
@@ -58,7 +58,7 @@
    font-weight:bold;
    font-size:larger;
    text-align:center;
-   top:20%;
+   top:30%;
    width:60%;
 }
 

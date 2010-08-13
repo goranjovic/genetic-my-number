@@ -3,42 +3,42 @@
    margin-left:23%
 }
 
-.x {
+#x {
    position:absolute;
    width:150px;
    left:25%
 }
 
-.a{
+#a{
    position:absolute;
    top:20%;
 }
 
-.b {
+#b {
    position:absolute;
    top:20%;
    left:10%;
 }
 
-.c {
+#c {
    position:absolute;
    top:20%;
    left:20%;
 }
 
-.d {
+#d {
    position:absolute;
    top:20%;
    left:30%
 }
 
-.e {
+#e {
    position:absolute;
    top:20%;
    left:40%
 }
 
-.f {
+#f {
    position:absolute;
    top:20%;
    left:50%
@@ -51,7 +51,7 @@
    left:30%;
 }
 
-.result{
+#result{
    position:absolute;
    background-color:green;
    color:white;

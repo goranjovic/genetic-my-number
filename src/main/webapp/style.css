@@ -46,10 +46,18 @@
 
 .solve {
    position:absolute;
+   color:green;
+   top:50%;
+   left:40%;
+}
+
+.reset {
+   position:absolute;
    color:red;
    top:50%;
-   left:30%;
+   left:20%;
 }
+
 
 #result{
    position:absolute;

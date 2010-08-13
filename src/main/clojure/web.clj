@@ -14,7 +14,7 @@
       [:body  
        [:div {:class "title"}
 	[:h2 
-	 [:a {:href "/" } title]]]
+	 [:p title]]]
         body]])) 
 
 
@@ -25,6 +25,7 @@
 		(text-field {:size 3} kwd (oldvalues kwd))) 
 		[:x :a :b :c :d :e :f]) 
       (text-area  {:class "result"} :result result) 
+      (reset-button { :class "reset"} "Reset")
       (submit-button { :class "solve"} "Solve"))))
 
 (defn result 

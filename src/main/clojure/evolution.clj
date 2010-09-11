@@ -49,7 +49,7 @@
 				 (Double/POSITIVE_INFINITY) difference)))
 
 (defn sort-by-fitness [goal-value population]
-	(sort-by (partial calculate-fitness goal-value) population))
+	(sort-by (partial calculate-fitness (int goal-value)) population))
 
 (defn select-survivors [population]
 		(take (/ (count population) 2) population))
@@ -75,7 +75,7 @@
 (defn evolution [goal-value generation options  old-population]
 	(let [sorted-population (sort-by-fitness goal-value  old-population )
 	      champion (first (take 1 sorted-population))]
-		(if (or (= generation (options :max-gen)) (= (evaluate champion) goal-value))
+		(if (or (= generation (int (options :max-gen))) (= (evaluate champion) goal-value))
 			(equation-pretty-print champion generation)
 			(recur goal-value (inc generation) options
 				(next-generation (select-survivors sorted-population))))))

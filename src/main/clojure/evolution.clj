@@ -86,6 +86,6 @@
 	([goal-value numbers] 
 		(solve goal-value numbers default-options)) 
 	([goal-value numbers user-options]
-		(let [options (merge-with (fn [v1 v2] v2) default-options user-options)]
+		(let [options (merge-with (fn [v1 v2] (if v2 v2 v1)) default-options user-options)]
 		(evolution goal-value 0 options 
 			(create-initial-population (options :population-size) numbers) ))))

@@ -48,6 +48,29 @@ body{
    left:50%
 }
 
+.options{
+   background-color:#ECF854;
+   border-width:2;
+   border-style:groove;
+   position:absolute;
+   height:100px;
+   width:200px;
+   left:70%;
+}
+
+
+.max-gen{
+   position:absolute;
+   width:100%;
+   top:20%;
+}
+
+.population-size{
+   position:absolute;
+   width:100%;
+   bottom:20%;
+}
+
 .solve {
    position:absolute;
    color:green;

@@ -72,13 +72,20 @@
 		(print-rel (print-rel (print-rel e q d) p a) o (print-rel b r (print-rel c s f))) )))
 
 
-(defn evolution [goal-value generation  old-population]
+(defn evolution [goal-value generation options  old-population]
 	(let [sorted-population (sort-by-fitness goal-value  old-population )
 	      champion (first (take 1 sorted-population))]
-		(if (or (= generation 1000) (= (evaluate champion) goal-value))
+		(if (or (= generation (options :max-gen)) (= (evaluate champion) goal-value))
 			(equation-pretty-print champion generation)
-			(evolution goal-value (inc generation)
+			(evolution goal-value (inc generation) options
 				(next-generation (select-survivors sorted-population))))))
 
-(defn solve [goal-value numbers]
-		(evolution goal-value 0 (create-initial-population 300 numbers)))
+(def default-options {:population-size 300 :max-gen 1000})
+
+(defn solve
+	([goal-value numbers] 
+		(solve goal-value numbers default-options)) 
+	([goal-value numbers user-options]
+		(let [options (merge-with (fn [v1 v2] v2) default-options user-options)]
+		(evolution goal-value 0 options 
+			(create-initial-population (options :population-size) numbers) ))))

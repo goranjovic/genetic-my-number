@@ -1,6 +1,7 @@
 (ns web
 (:use evolution)
-(:use compojure))
+(:use compojure)
+(:use clojure.contrib.java-utils))
 
 
 (defn html-doc 
@@ -17,10 +18,17 @@
 	 [:p title]]]
         body]]))
 
+(def web-root-path "./src/main/webapp")
+
+(def locale (read-properties (str web-root-path "/locale.properties")))
+
+(defn localize [kwd]
+	(. locale getProperty (name kwd) (name kwd)))
+
 (defn form-element [oldvalues elem]
      (if (vector? elem)
 	(form-structure elem oldvalues)
-	[:div {:class (name elem)} (label (name elem) (name elem))
+	[:div {:class (name elem)} (label (name elem) (localize elem))
 	(text-field {:size 3} elem (oldvalues elem))]))
 
 (defn form-structure [kwds oldvalues]
@@ -36,8 +44,8 @@
 			(with-meta [:max-gen :population-size]{:div-id "options"})] 
 			{:div-id "form"}) oldvalues)
       (text-area  {:class "result"} :result result) 
-      (reset-button { :class "reset"} "Reset")
-      (submit-button { :class "solve"} "Solve"))))
+      (reset-button { :class "reset"} (localize :reset))
+      (submit-button { :class "solve"} (localize :solve)))))
 
 (defn parse-int [raw]
 	(if (or (nil? raw) (= raw ""))
@@ -61,7 +69,7 @@
 (defroutes webservice
   (GET "/" (sum-form params nil))
   (GET "/*"
-       (or (serve-file "./src/main/webapp" (params :*)) 
+       (or (serve-file web-root-path (params :*)) 
        :next))
   (GET "*"  404)
   (POST "/" 

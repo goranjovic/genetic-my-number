@@ -21,16 +21,17 @@
 (defn sum-form [oldvalues result]
   (html-doc "Genetic My Number"
     (form-to [:post "/"]
-      (map (fn [kwd] 
-		(text-field {:size 3} kwd (oldvalues kwd))) 
-		[:x :a :b :c :d :e :f]) 
+      (map (fn [kwd]
+      		[:div {:class (name kwd)} (label (name kwd) (name kwd)) 
+		(text-field {:size 3} kwd (oldvalues kwd))])
+		[:goal :a :b :c :d :e :f])
       (text-area  {:class "result"} :result result) 
       (reset-button { :class "reset"} "Reset")
       (submit-button { :class "solve"} "Solve"))))
 
 (defn result 
   [params]
-  (let [x (Integer/parseInt (params :x))
+  (let [x (Integer/parseInt (params :goal))
 	a (Integer/parseInt (params :a))
         b (Integer/parseInt (params :b))
         c (Integer/parseInt (params :c))

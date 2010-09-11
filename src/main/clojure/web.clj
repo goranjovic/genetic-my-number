@@ -25,6 +25,8 @@
 (defn localize [kwd]
 	(. locale getProperty (name kwd) (name kwd)))
 
+(declare form-structure)
+
 (defn form-element [oldvalues elem]
      (if (vector? elem)
 	(form-structure elem oldvalues)

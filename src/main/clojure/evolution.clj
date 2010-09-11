@@ -77,7 +77,7 @@
 	      champion (first (take 1 sorted-population))]
 		(if (or (= generation (options :max-gen)) (= (evaluate champion) goal-value))
 			(equation-pretty-print champion generation)
-			(evolution goal-value (inc generation) options
+			(recur goal-value (inc generation) options
 				(next-generation (select-survivors sorted-population))))))
 
 (def default-options {:population-size 300 :max-gen 1000})

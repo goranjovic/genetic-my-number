@@ -57,19 +57,21 @@
       (reset-button { :class "reset"} (localize :reset))
       (submit-button { :class "solve"} (localize :solve)))))
 
-(defn parse-int [raw]
+(defn parse-int 
+      ([raw default]
 	(if (or (nil? raw) (= raw ""))
-		nil (Integer/parseInt raw)))
+		default (Integer/parseInt raw)))
+      ([raw](parse-int raw nil)))
 
 (defn result 
   [params]
-  (let [x (parse-int (params :goal))
-	a (parse-int (params :a))
-        b (parse-int (params :b))
-        c (parse-int (params :c))
-        d (parse-int (params :d))
-        e (parse-int (params :e)) 
-        f (parse-int (params :f))
+  (let [x (parse-int (params :goal) 0)
+	a (parse-int (params :a) 0)
+        b (parse-int (params :b) 0)
+        c (parse-int (params :c) 0)
+        d (parse-int (params :d) 0)
+        e (parse-int (params :e) 0) 
+        f (parse-int (params :f) 0)
 	
 	max-gen (parse-int (params :max-gen))
 	population-size (parse-int (params :population-size))

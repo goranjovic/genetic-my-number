@@ -1,6 +1,14 @@
 
+.title, label{
+   color:yellow
+}
+
+input[type="text"]{
+   font-weight:bold;
+}
+
 body{
-   background-color:#BB7A3E;
+   background:url('background.jpg') fixed;
 }
 
 .title{
@@ -49,13 +57,14 @@ body{
 }
 
 .options{
-   background-color:#ECF854;
+   background-color:transparent;
    border-width:2;
    border-style:groove;
    position:absolute;
    height:100px;
    width:200px;
-   left:70%;
+   right:20px;
+   top:20px;
 }
 
 

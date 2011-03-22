@@ -75,8 +75,7 @@
 
 (defn equation-pretty-print [[numbers operators] generation]
 		(let [[a b c d e f] numbers [o p q r s] operators]
-		(str "[gen: " generation "] " 
-				(evaluate [numbers operators]) " = " 
+		(str (evaluate [numbers operators]) " = " 
 		(print-rel (print-rel (print-rel e q d) p a) o (print-rel b r (print-rel c s f))) )))
 
 
@@ -88,7 +87,7 @@
 			(recur goal-value (inc generation) options
 				(next-generation (select-survivors sorted-population))))))
 
-(def default-options {:population-size 300 :max-gen 1000})
+(def default-options {:population-size 50 :max-gen 2000})
 
 (defn solve
 	([goal-value numbers] 

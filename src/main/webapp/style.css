@@ -1,10 +1,25 @@
 
+*{
+   font-size:18pt;
+}
+
 .title, label{
-   color:yellow
+   color:yellow;
+}
+
+input{
+   font-weight:bold;
 }
 
 input[type="text"]{
-   font-weight:bold;
+   width:100px;
+   text-align:right;
+   background-color:rgba(255,255,255,0.5);
+}
+
+input:focus{
+   background-color: #F2E697;
+   color: #4C3DFF;
 }
 
 body{
@@ -17,43 +32,44 @@ body{
 
 .goal {
    position:absolute;
-   width:150px;
+   width:500px;
    left:25%
 }
 
 .a{
    position:absolute;
-   top:20%;
+   top:30%;
+   left:2%;
 }
 
 .b {
    position:absolute;
-   top:20%;
-   left:10%;
+   top:30%;
+   left:12%;
 }
 
 .c {
    position:absolute;
-   top:20%;
-   left:20%;
+   top:30%;
+   left:22%;
 }
 
 .d {
    position:absolute;
-   top:20%;
-   left:30%
+   top:30%;
+   left:32%
 }
 
 .e {
    position:absolute;
-   top:20%;
-   left:40%
+   top:30%;
+   left:42%
 }
 
 .f {
    position:absolute;
-   top:20%;
-   left:50%
+   top:30%;
+   left:52%
 }
 
 .options{
@@ -61,48 +77,46 @@ body{
    border-width:2;
    border-style:groove;
    position:absolute;
-   height:100px;
-   width:200px;
+   height:200px;
+   width:250px;
    right:20px;
    top:20px;
+   display:none;
 }
-
 
 .max-gen{
    position:absolute;
-   width:100%;
    top:20%;
+   right:0px;
 }
 
 .population-size{
    position:absolute;
-   width:100%;
    bottom:20%;
+   right:0px;
 }
 
 .solve {
    position:absolute;
    color:green;
-   top:50%;
+   top:60%;
    left:40%;
 }
 
 .reset {
    position:absolute;
    color:red;
-   top:50%;
+   top:60%;
    left:20%;
 }
 
 
 #result{
    position:absolute;
-   background-color:green;
+   background-color:rgba(255,255,255,0.5);
    color:white;
-   font-weight:bold;
-   font-size:larger;
    text-align:center;
-   top:30%;
+   top:40%;
    width:60%;
 }
 

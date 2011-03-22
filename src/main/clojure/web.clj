@@ -33,27 +33,23 @@
 (defn localize [kwd]
 	(. locale getProperty (name kwd) (name kwd)))
 
-(declare form-structure)
 
 (defn form-element [oldvalues elem]
-     (if (vector? elem)
-	(form-structure elem oldvalues)
 	[:div {:class (name elem)} (label (name elem) (localize elem))
-	(text-field {:size 3} elem (oldvalues elem))]))
+	(text-field {:size 3} elem (oldvalues elem))])
 
-(defn form-structure [kwds oldvalues]
-		[:div {:class ((meta kwds) :div-id)}
-		(map (partial form-element oldvalues)
-		kwds )])
+
+(defn form-structure [kwds oldvalues] 
+  [:div {:class "form"}
+   (map (partial form-element oldvalues) kwds)
+    [:div {:class "options"}
+     (map (partial form-element {}) [:max-gen :population-size])]])
 
 (defn sum-form [oldvalues result]
-  (html-doc "Genetic My Number"
+  (html-doc (localize :title) 
     (form-to [:post "/"]
-      (form-structure
-		(with-meta [:goal :a :b :c :d :e :f 
-			(with-meta [:max-gen :population-size]{:div-id "options"})] 
-			{:div-id "form"}) oldvalues)
-      (text-area  {:class "result"} :result result) 
+      (form-structure [:goal :a :b :c :d :e :f] oldvalues)
+      (text-area  {:class "result" :readonly "true"} :result result) 
       (reset-button { :class "reset"} (localize :reset))
       (submit-button { :class "solve"} (localize :solve)))))
 

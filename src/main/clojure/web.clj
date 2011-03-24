@@ -28,6 +28,8 @@
 
 (def web-root-path "./src/main/webapp")
 
+(def code-link "http://code.google.com/p/genetic-my-number/")
+
 (def locale (read-properties (str web-root-path "/locale.properties")))
 
 (defn localize [kwd]
@@ -45,13 +47,19 @@
     [:div {:class "options"}
      (map (partial form-element {}) [:max-gen :population-size])]])
 
+(defn description-text []
+  [:div {:class "description"} 
+   [:ul [:li (localize :description)]
+        [:li (localize :details) " " 
+         [:a {:href code-link :target "_blank"} (localize :code)]]]])
+
 (defn sum-form [oldvalues result]
   (html-doc (localize :title) 
     (form-to [:post "/"]
       (form-structure [:goal :a :b :c :d :e :f] oldvalues)
       (text-area  {:class "result" :readonly "true"} :result result) 
-      (reset-button { :class "reset"} (localize :reset))
-      (submit-button { :class "solve"} (localize :solve)))))
+      (submit-button { :class "solve"} (localize :solve))
+      (description-text))))
 
 (defn parse-int 
       ([raw default]
@@ -74,14 +82,18 @@
 	] 
       (solve x [a b c d e f] {:max-gen max-gen :population-size population-size}))) 
 
+(defn service-output [params]
+  (apply str (interpose ";" (result params))))
+
 (defroutes webservice
+  (GET "/service" (service-output params))
   (GET "/" (sum-form params nil))
   (GET "/*"
        (or (serve-file web-root-path (params :*)) 
        :next))
   (GET "*"  404)
   (POST "/" 
-    (sum-form params (result params))))
+    (sum-form params (first (result params)))))
 
 (defn serve-app []
 	(defonce server

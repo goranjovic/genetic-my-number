@@ -81,9 +81,12 @@
 
 (defn evolution [goal-value generation options  old-population]
 	(let [sorted-population (sort-by-fitness goal-value  old-population )
-	      champion (first (take 1 sorted-population))]
-		(if (or (= generation (int (options :max-gen))) (= (evaluate champion) goal-value))
-			(equation-pretty-print champion generation)
+	      champion (first (take 1 sorted-population))
+              champ-value (evaluate champion)
+              hit? (= champ-value goal-value)
+              max-gen-reached? (= generation (int (options :max-gen)))]
+		(if (or max-gen-reached? hit?)
+			[(equation-pretty-print champion generation) hit? generation]
 			(recur goal-value (inc generation) options
 				(next-generation (select-survivors sorted-population))))))
 

@@ -1,6 +1,7 @@
 
 *{
    font-size:18pt;
+   font-family:Tahoma;
 }
 
 .title, label{
@@ -99,17 +100,10 @@ body{
 .solve {
    position:absolute;
    color:green;
-   top:60%;
-   left:40%;
+   top:53%;
+   left:32%;
+   width:100px;
 }
-
-.reset {
-   position:absolute;
-   color:red;
-   top:60%;
-   left:20%;
-}
-
 
 #result{
    position:absolute;
@@ -120,3 +114,28 @@ body{
    width:60%;
 }
 
+.description{
+   position:absolute;
+   top:70%;
+   width:60%;
+   height:150px;
+   color:white;
+   background-color:rgba(0,0,0,0.4);
+}
+
+li,a{
+  font-size:14pt;
+}
+
+
+a{
+   color:cyan;
+}
+
+a:hover{
+   color:yellow;
+}
+
+a:visited{
+   color:blue;
+}

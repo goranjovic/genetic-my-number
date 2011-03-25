@@ -19,7 +19,8 @@
     [:html 
       [:head 
         [:title title]
-	(include-css "style.css")]
+	(include-css "style.css")
+        (include-js "ga.js")]
       [:body  
        [:div {:class "title"}
 	[:h2 
@@ -29,6 +30,8 @@
 (def web-root-path "./src/main/webapp")
 
 (def code-link "http://code.google.com/p/genetic-my-number/")
+
+(def look-ma-link "http://look-ma.appspot.com/")
 
 (def locale (read-properties (str web-root-path "/locale.properties")))
 
@@ -53,13 +56,20 @@
         [:li (localize :details) " " 
          [:a {:href code-link :target "_blank"} (localize :code)]]]])
 
+(defn legal-text []
+  [:div {:class "footer"} 
+   [:div {:class "legal"}(localize :legal)]
+   [:div {:class "legal"}(localize :acknowledgement) 
+    [:a {:href look-ma-link :target "_blank"} "nevenavv"]]])
+
 (defn sum-form [oldvalues result]
   (html-doc (localize :title) 
     (form-to [:post "/"]
       (form-structure [:goal :a :b :c :d :e :f] oldvalues)
       (text-area  {:class "result" :readonly "true"} :result result) 
       (submit-button { :class "solve"} (localize :solve))
-      (description-text))))
+      (description-text)
+      (legal-text))))
 
 (defn parse-int 
       ([raw default]

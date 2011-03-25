@@ -74,33 +74,45 @@ body{
 }
 
 .options{
-   background-color:transparent;
-   border-width:2;
+   border-width:1;
    border-style:groove;
    position:absolute;
    height:200px;
    width:250px;
    right:20px;
    top:20px;
+   background-color:rgba(0,0,0,0.2);
    display:none;
+}
+
+.options-inner{
+   position:absolute;
+   height:100%;
+   width:100%;
+}
+.options-title{
+   position:absolute;
+   color:yellow;
+   top:0%;
+   left:30%;
 }
 
 .max-gen{
    position:absolute;
    top:20%;
-   right:0px;
+   right:5px;
 }
 
 .population-size{
    position:absolute;
    bottom:20%;
-   right:0px;
+   right:5px;
 }
 
 .solve {
    position:absolute;
    color:green;
-   top:53%;
+   top:55%;
    left:32%;
    width:100px;
 }
@@ -116,20 +128,34 @@ body{
 
 .description{
    position:absolute;
-   top:70%;
+   top:65%;
    width:60%;
    height:150px;
    color:white;
    background-color:rgba(0,0,0,0.4);
 }
 
-li,a{
+.footer{
+   position:absolute;
+   bottom:2%;
+   width:90%;
+   height:40px;
+}
+
+.legal{
+   color:white;
+   font-size:10pt;
+   text-align:center;
+}
+
+li{
   font-size:14pt;
 }
 
 
 a{
    color:cyan;
+   font-size:inherit;
 }
 
 a:hover{

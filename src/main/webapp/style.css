@@ -1,6 +1,6 @@
 
 *{
-   font-size:18pt;
+   font-size:x-large;
    font-family:Tahoma;
 }
 
@@ -12,8 +12,14 @@ input{
    font-weight:bold;
 }
 
-input[type="text"]{
-   width:100px;
+.fieldcontainer{
+   width:8%;
+   height:5%;
+}
+
+.field{
+   width:100%;
+   height:100%;
    text-align:right;
    background-color:rgba(255,255,255,0.5);
 }
@@ -25,16 +31,21 @@ input:focus{
 
 body{
    background:url('background.jpg') fixed;
+   background-size:100% 100%;
 }
 
 .title{
-   margin-left:23%
+   margin-left:26%
 }
 
 .goal {
    position:absolute;
-   width:500px;
-   left:25%
+   width:15%;
+   left:32%
+}
+
+.goal input{
+   width:50%;
 }
 
 .a{
@@ -114,7 +125,7 @@ body{
    color:green;
    top:55%;
    left:32%;
-   width:100px;
+   width:8%;
 }
 
 #result{
@@ -130,32 +141,33 @@ body{
    position:absolute;
    top:65%;
    width:60%;
-   height:150px;
+   height:22%;
    color:white;
    background-color:rgba(0,0,0,0.4);
+   overflow:auto;
 }
 
 .footer{
    position:absolute;
-   bottom:2%;
-   width:90%;
-   height:40px;
+   top:93%;
+   width:72%;
+   height:2%;
 }
 
 .legal{
    color:white;
-   font-size:10pt;
+   font-size:small;
    text-align:center;
 }
 
 li{
-  font-size:14pt;
+  font-size:medium;
 }
 
 
 a{
    color:cyan;
-   font-size:inherit;
+   font-size:smaller;
 }
 
 a:hover{

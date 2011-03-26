@@ -40,8 +40,9 @@
 
 
 (defn form-element [oldvalues elem]
-	[:div {:class (name elem)} (label (name elem) (localize elem))
-	(text-field {:size 3} elem (oldvalues elem))])
+	[:div {:class (str (name elem) " fieldcontainer")} 
+                 (label (name elem) (localize elem))
+	(text-field {:size 3 :class "field"} elem (oldvalues elem))])
 
 
 (defn form-structure [kwds oldvalues] 

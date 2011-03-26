@@ -73,7 +73,7 @@
 			(str "(" e1 " " (operators-visible rel) " " e2 ")" ))))
 
 
-(defn equation-pretty-print [[numbers operators] generation]
+(defn equation-pretty-print [[numbers operators]]
 		(let [[a b c d e f] numbers [o p q r s] operators]
 		(str (evaluate [numbers operators]) " = " 
 		(print-rel (print-rel (print-rel e q d) p a) o (print-rel b r (print-rel c s f))) )))
@@ -86,15 +86,20 @@
               hit? (= champ-value goal-value)
               max-gen-reached? (= generation (int (options :max-gen)))]
 		(if (or max-gen-reached? hit?)
-			[(equation-pretty-print champion generation) hit? generation]
+			[(equation-pretty-print champion) hit? generation]
 			(recur goal-value (inc generation) options
 				(next-generation (select-survivors sorted-population))))))
 
 (def default-options {:population-size 50 :max-gen 2000})
 
+(defn solve-trivially [goal-value numbers] 
+  (if (some #(= % goal-value) numbers) 
+    [(str goal-value " = " goal-value) true 0]))
+
 (defn solve
 	([goal-value numbers] 
-		(solve goal-value numbers default-options)) 
+            (or (solve-trivially goal-value numbers)
+		(solve goal-value numbers default-options)))
 	([goal-value numbers user-options]
 		(let [options (merge-with (fn [v1 v2] (if v2 v2 v1)) default-options user-options)]
 		(evolution goal-value 0 options 

@@ -28,7 +28,8 @@
 
 (defn equation-pretty-print [[numbers operators] value]
       (let [[a b c d e f] numbers
-            [o p q r s] operators]
+            [o p q r s] operators
+            -- (fn [a] (if (neg? a) (str "(" a ")") a))]
          (str value " = "
-         (print-rel (print-rel (print-rel e q d) p a)
-                       o (print-rel b r (print-rel c s f))))))
+              (print-rel (print-rel (print-rel e q (-- d)) p (-- a))
+                o (print-rel b r (print-rel c s (-- f)))))))
